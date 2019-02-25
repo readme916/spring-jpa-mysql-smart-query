@@ -415,7 +415,7 @@ public class SQLSelectBuilder {
 		StartAndSize startAndSize = new StartAndSize();
 
 		String property = ApplicationContextSupport.getApplicationContext().getEnvironment()
-				.getProperty("spring.jpa.smart-query.max-result-rows");
+				.getProperty("spring.jpa.mysql-smart-query.max-result-rows");
 		int fetchRows = 5000;
 		if (property != null) {
 			fetchRows = Integer.valueOf(property);
