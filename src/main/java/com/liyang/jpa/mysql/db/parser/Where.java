@@ -26,7 +26,7 @@ public class Where implements Expression {
 		if (split.length == 1) {
 
 			if (!mainEntityStructure.getSimpleFields().containsKey(token.getKey())) {
-				throw new GetFormatException(8711, "查询异常", "实体对象" + mainEntityStructure.getName() + "不存在普通属�?" + token.getKey());
+				throw new GetFormatException(8711, "查询异常", "实体对象" + mainEntityStructure.getName() + "不存在普通属性" + token.getKey());
 			}
 			String tableAlias = mainEntityStructure.getName();
 			String columnName = mainEntityStructure.getSimpleFields().get(token.getKey()).getSimpleColumn();
@@ -44,12 +44,12 @@ public class Where implements Expression {
 
 		} else if (split.length == 2) {
 			if (!mainEntityStructure.getObjectFields().containsKey(split[0])) {
-				throw new GetFormatException(8811, "查询异常", "实体对象" + mainEntityStructure.getName() + "不存在对象属�?" + split[0]);
+				throw new GetFormatException(8811, "查询异常", "实体对象" + mainEntityStructure.getName() + "不存在对象属性" + split[0]);
 			}
 			EntityStructure targetClassstructure = JpaSmartQuerySupport
 					.getStructure(mainEntityStructure.getObjectFields().get(split[0]).getTargetEntity());
 			if (!targetClassstructure.getSimpleFields().containsKey(split[1])) {
-				throw new GetFormatException(7699, "查询异常", "实体对象" + targetClassstructure.getName() + "不存在普通属�?" + split[1]);
+				throw new GetFormatException(7699, "查询异常", "实体对象" + targetClassstructure.getName() + "不存在普通属性" + split[1]);
 			}
 			String tableAlias = split[0];
 			String columnName = targetClassstructure.getSimpleFields().get(split[1]).getSimpleColumn();
