@@ -81,16 +81,9 @@ public class JpaSmartQuerySupport {
 		}
 		jdbcTemplate = jdbc;
 		
-		Map<String, Object> beansWithAnnotation = ApplicationContextSupport
-				.getBeansWithAnnotation(org.springframework.boot.autoconfigure.SpringBootApplication.class);
-		for (Map.Entry<String, Object> entry : beansWithAnnotation.entrySet()) {
-			EnableJpaSmartQuery annotation = entry.getValue().getClass()
-					.getAnnotation(EnableJpaSmartQuery.class);
-			if (annotation != null) {
-				logger.info("@EnableJpaSmartQuery discovery");
-				_checkDomain();
-			}
-		}
+		logger.info("JpaSmartQuery start check Entity");
+		_checkDomain();
+		
 	}
 
 	private void _checkDomain() {
