@@ -13,3 +13,9 @@
 
 ### 支持符合属性的查询：
 - 例如 fields=roleObject,departmentObject,*&roleObject.id=1&departmentObject.id[not]=2
+
+
+
+### 配置参数
+- 在application.yml或者properties中添加spring.jpa.mysql-smart-query.max-result-rows，默认值是5000，如需要可以改大，改小
+- 本参数的意义是，数据库返回的原始数据的最大行数
