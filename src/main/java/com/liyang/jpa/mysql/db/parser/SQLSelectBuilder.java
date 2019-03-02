@@ -235,11 +235,9 @@ public class SQLSelectBuilder {
 		for (Map<String, Object> row : queryForList) {
 			rowToMapListFirstMerge(row, mapList, nametostructure);
 		}
-
 		for (Map<String, Object> row : queryForList) {
 			rowToMapListSecondMerge(row, mapList, nametostructure);
 		}
-
 		return mapListToMap(mapList, nametostructure);
 	}
 
@@ -277,7 +275,7 @@ public class SQLSelectBuilder {
 					mapLv2 = (Map) ((Map) mapLv1).get(split[0]);
 				}
 
-				if (mapLv2 == null) {
+				if (mapLv2 == null || mapLv2.isEmpty()) {
 					continue;
 				}
 				Map mapLv3 = null;

@@ -64,7 +64,7 @@ public class JpaSmartQuerySupport {
 		if (classToStructure.containsKey(clz)) {
 			return classToStructure.get(clz);
 		} else {
-			throw new GetFormatException(7172, "结构异常", "没有这个实体" + clz.getSimpleName());
+			throw new GetFormatException(7174, "结构异常", "没有这个实体" + clz.getSimpleName());
 		}
 	}
 

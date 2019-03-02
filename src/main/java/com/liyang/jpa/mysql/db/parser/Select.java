@@ -67,7 +67,7 @@ public class Select implements Expression {
 					}
 
 				} else {
-					throw new GetFormatException(6732, "查询异常", "实体类：" + entityStructure.getTableName() + "，没有属�?:" + column);
+					throw new GetFormatException(6732, "查询异常", "实体类：" + entityStructure.getTableName() + "，没有属性" + column);
 				}
 			}
 

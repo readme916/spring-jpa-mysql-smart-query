@@ -35,7 +35,7 @@ public class LeftJoin implements Expression {
 			}
 			if (!entityStructure.getObjectFields().containsKey(column)
 					&& !entityStructure.getSimpleFields().containsKey(column)) {
-				throw new GetFormatException(6532, "查询异常", "实体对象" + entityStructure.getName() + "不存在属�?" + column);
+				throw new GetFormatException(6532, "查询异常", "实体对象" + entityStructure.getName() + "不存在属性" + column);
 			}
 			if (entityStructure.getSimpleFields().containsKey(column)) {
 				return;
