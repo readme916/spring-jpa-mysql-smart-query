@@ -17,6 +17,7 @@ import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,13 +33,13 @@ import com.liyang.jpa.mysql.db.structure.Stopword;
 import com.liyang.jpa.mysql.exception.StructureException;
 
 @Service
+@DependsOn("applicationContextSupport")
 public class EntityRegister {
 	
 	protected final static Logger logger = LoggerFactory.getLogger(EntityRegister.class);
 	
-	
 	@PostConstruct
-	public void register() {
+	public void registerAllEntity() {
 		logger.info("JpaSmartQuery start check Entity");
 		_checkDomain();
 	}
