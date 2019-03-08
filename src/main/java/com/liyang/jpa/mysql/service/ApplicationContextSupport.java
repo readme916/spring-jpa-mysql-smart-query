@@ -1,4 +1,4 @@
-package com.liyang.jpa.mysql.config;
+package com.liyang.jpa.mysql.service;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -9,7 +9,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ApplicationContextSupport implements ApplicationContextAware{
 	
 	protected final static Logger logger = LoggerFactory.getLogger(ApplicationContextSupport.class); 

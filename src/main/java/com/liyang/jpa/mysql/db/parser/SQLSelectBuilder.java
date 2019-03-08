@@ -20,7 +20,6 @@ import org.springframework.cache.CacheManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.liyang.jpa.mysql.config.ApplicationContextSupport;
 import com.liyang.jpa.mysql.config.JpaSmartQuerySupport;
 import com.liyang.jpa.mysql.db.parser.Tokenizer.Token;
 import com.liyang.jpa.mysql.db.structure.ColumnJoinType;
@@ -28,6 +27,8 @@ import com.liyang.jpa.mysql.db.structure.ColumnStucture;
 import com.liyang.jpa.mysql.db.structure.EntityStructure;
 import com.liyang.jpa.mysql.exception.GetFormatException;
 import com.liyang.jpa.mysql.response.HTTPListResponse;
+import com.liyang.jpa.mysql.service.ApplicationContextSupport;
+import com.liyang.jpa.mysql.service.JdbcQueryService;
 
 public class SQLSelectBuilder {
 
@@ -155,7 +156,7 @@ public class SQLSelectBuilder {
 			preparedParams.put("pageStart", _preCount.getStart());
 			preparedParams.put("pageSize", _preCount.getOffset());
 
-			List<Map<String, Object>> queryForList = JpaSmartQuerySupport.query(this.preparedStatements.fetchSql,
+			List<Map<String, Object>> queryForList = JdbcQueryService.query(this.preparedStatements.fetchSql,
 					preparedParams);
 			return new HTTPListResponse(transformAsList(queryForList, mainEntityStructure), _preCount.getTotal(), page,
 					size);
@@ -181,7 +182,7 @@ public class SQLSelectBuilder {
 		for (Token token : values) {
 			preparedParams.put(token.getOrigin(), token.getValue());
 		}
-		List<Map<String, Object>> queryForCount = JpaSmartQuerySupport.query(this.preparedStatements.countSql,
+		List<Map<String, Object>> queryForCount = JdbcQueryService.query(this.preparedStatements.countSql,
 				preparedParams);
 		return countStartAndOffsetOfList(queryForCount, page, size);
 	}
