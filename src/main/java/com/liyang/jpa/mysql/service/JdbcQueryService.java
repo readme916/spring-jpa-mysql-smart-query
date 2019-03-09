@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class JdbcQueryService {
 
-	
 	private static NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public static void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
 		JdbcQueryService.jdbcTemplate = jdbcTemplate;
 	}
 

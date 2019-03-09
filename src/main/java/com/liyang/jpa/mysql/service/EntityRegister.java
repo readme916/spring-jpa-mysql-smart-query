@@ -16,7 +16,10 @@ import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,18 +36,25 @@ import com.liyang.jpa.mysql.db.structure.Stopword;
 import com.liyang.jpa.mysql.exception.StructureException;
 
 @Service
-@DependsOn("applicationContextSupport")
-public class EntityRegister {
-	
+public class EntityRegister implements ApplicationContextAware {
+
 	protected final static Logger logger = LoggerFactory.getLogger(EntityRegister.class);
-	
+	private ApplicationContext applicationContext;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
 	@PostConstruct
 	public void registerAllEntity() {
 		logger.info("JpaSmartQuery start check Entity");
 		_checkDomain();
 	}
+
 	private void _checkDomain() {
-		Map<String, JpaRepository> beans = ApplicationContextSupport.getBeansOfType(JpaRepository.class);
+		Map<String, JpaRepository> beans = applicationContext.getBeansOfType(JpaRepository.class);
+		logger.info(beans.toString());
 		for (JpaRepository jpaRepository : beans.values()) {
 			ResolvableType resolvableType = ResolvableType.forClass(jpaRepository.getClass());
 			Class<?> entityClass = resolvableType.as(JpaRepository.class).getGeneric(0).resolve();
