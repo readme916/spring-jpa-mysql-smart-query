@@ -2,6 +2,7 @@ package com.liyang.jpa.mysql.service;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.Column;
@@ -54,12 +55,14 @@ public class EntityRegister implements ApplicationContextAware {
 
 	private void _checkDomain() {
 		Map<String, JpaRepository> beans = applicationContext.getBeansOfType(JpaRepository.class);
-		logger.info(beans.toString());
 		for (JpaRepository jpaRepository : beans.values()) {
 			ResolvableType resolvableType = ResolvableType.forClass(jpaRepository.getClass());
 			Class<?> entityClass = resolvableType.as(JpaRepository.class).getGeneric(0).resolve();
 			_entityStructureCheckAndRegister(entityClass, jpaRepository);
 		}
+		Set<String> keySet = JpaSmartQuerySupport.getNametostructure().keySet();
+		logger.info("Entity: ("+String.join(",", keySet)+")");
+	
 	}
 
 	// 实体类的注解
