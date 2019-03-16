@@ -1,7 +1,9 @@
 package com.liyang.jpa.smart.query.db.structure;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,6 +20,17 @@ public class EntityStructure {
 	private Map<String, ColumnStucture> simpleFields = new HashMap();
 	
 	private Map<String, ColumnStucture> objectFields = new HashMap();
+	
+	private HashSet<String> events = new HashSet();
+	
+
+	public HashSet<String> getEvents() {
+		return events;
+	}
+
+	public void setEvents(HashSet<String> events) {
+		this.events = events;
+	}
 
 	public JpaRepository getJpaRepository() {
 		return jpaRepository;
