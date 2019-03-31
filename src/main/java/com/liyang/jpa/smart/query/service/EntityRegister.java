@@ -89,7 +89,6 @@ public class EntityRegister implements ApplicationContextAware {
 
 	}
 
-	// 属�?�检查，并加入结构中
 	private void _columnCheck(Field field, EntityStructure entityStructure) {
 
 		if (field.getDeclaredAnnotation(JsonIgnore.class) != null) {
