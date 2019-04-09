@@ -20,17 +20,7 @@ public class EntityStructure {
 	private Map<String, ColumnStucture> simpleFields = new HashMap();
 	
 	private Map<String, ColumnStucture> objectFields = new HashMap();
-	
-	private HashSet<EntityEvent> events = new HashSet();
 
-
-	public HashSet<EntityEvent> getEvents() {
-		return events;
-	}
-
-	public void setEvents(HashSet<EntityEvent> events) {
-		this.events = events;
-	}
 
 	public JpaRepository getJpaRepository() {
 		return jpaRepository;
@@ -80,37 +70,5 @@ public class EntityStructure {
 		this.objectFields = objectFields;
 	}
 
-	public static class EntityEvent{
-		private HashSet<String> fields;
-		private String condition;
-		private String name;
-		private HashSet<String> roles;
-		
-		public HashSet<String> getRoles() {
-			return roles;
-		}
-		public void setRoles(HashSet<String> roles) {
-			this.roles = roles;
-		}
-		public HashSet<String> getFields() {
-			return fields;
-		}
-		public void setFields(HashSet<String> fields) {
-			this.fields = fields;
-		}
-		public String getCondition() {
-			return condition;
-		}
-		public void setCondition(String condition) {
-			this.condition = condition;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-	}
-	
+
 }
