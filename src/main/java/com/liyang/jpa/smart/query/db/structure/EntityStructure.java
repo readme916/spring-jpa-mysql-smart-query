@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class EntityStructure {
 
 	private String name;
@@ -15,6 +17,7 @@ public class EntityStructure {
 	
 	private Class<?> entityClass;
 	
+	@JsonIgnore
 	private JpaRepository jpaRepository;
 	
 	private Map<String, ColumnStucture> simpleFields = new HashMap();
