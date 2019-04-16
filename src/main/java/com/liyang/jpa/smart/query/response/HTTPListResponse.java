@@ -6,7 +6,9 @@ public class HTTPListResponse {
 	private long pageNumber;
 	private long pageSize;
 	
-	
+	public HTTPListResponse() {
+		
+	}
 	public HTTPListResponse(Object items, long total, long pageNumber, long pageSize) {
 		super();
 		this.items = items;
