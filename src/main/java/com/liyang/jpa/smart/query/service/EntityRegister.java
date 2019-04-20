@@ -1,6 +1,7 @@
 package com.liyang.jpa.smart.query.service;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,11 +27,13 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.liyang.jpa.smart.query.db.SmartQuery;
+import com.liyang.jpa.smart.query.db.structure.BaseEnum;
 import com.liyang.jpa.smart.query.db.structure.ColumnFormat;
 import com.liyang.jpa.smart.query.db.structure.ColumnJoinType;
 import com.liyang.jpa.smart.query.db.structure.ColumnStucture;
 import com.liyang.jpa.smart.query.db.structure.EntityStructure;
 import com.liyang.jpa.smart.query.db.structure.Stopword;
+import com.liyang.jpa.smart.query.db.structure.ValueLabelPair;
 import com.liyang.jpa.smart.query.exception.StructureException;
 
 @Service
@@ -97,19 +100,38 @@ public class EntityRegister implements ApplicationContextAware {
 			return;
 		}
 
+		//普通字段
 		Column columnAnnotation = field.getDeclaredAnnotation(Column.class);
 		if (columnAnnotation != null) {
 			if ("".equals(columnAnnotation.name())) {
 				throw new StructureException("实体" + field.getDeclaringClass().getSimpleName() + "的属性" + field.getName()
 						+ "的@Column注解没有name");
 			}
-			ColumnStucture column = new ColumnStucture(ColumnFormat.SIMPLE, null, null, field.getType(),
+			ColumnStucture column = new ColumnStucture(ColumnFormat.parseFormat(field), null, null, field.getType(),
 					entityStructure.getTableName(), null, null, columnAnnotation.name());
 			Class<?> type = field.getType();
 			if (type.isPrimitive()) {
 				throw new StructureException(
 						"实体" + field.getDeclaringClass().getSimpleName() + "的属性" + field.getName() + " 必须为包装类 ");
 			}
+			
+			if(column.getFormat().equals(ColumnFormat.ENUM)) {
+				ArrayList<ValueLabelPair> arrayList = new ArrayList<ValueLabelPair>();
+				if(BaseEnum.class.isAssignableFrom(column.getTargetEntity())) {
+					Object[] enumConstants = column.getTargetEntity().getEnumConstants();
+					for (Object object : enumConstants) {
+						BaseEnum e = (BaseEnum)object;
+						arrayList.add(new ValueLabelPair(e.toString(),e.getLabel()));
+					}
+				}else {
+					Object[] enumConstants = column.getTargetEntity().getEnumConstants();
+					for (Object object : enumConstants) {
+						arrayList.add(new ValueLabelPair(object.toString(),object.toString()));
+					}
+				}
+				column.setValues(arrayList);
+			}
+			
 			entityStructure.getSimpleFields().put(field.getName(), column);
 			return;
 		}

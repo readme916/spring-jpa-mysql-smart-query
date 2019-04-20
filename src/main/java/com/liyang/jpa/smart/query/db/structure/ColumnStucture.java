@@ -1,5 +1,7 @@
 package com.liyang.jpa.smart.query.db.structure;
 
+import java.util.ArrayList;
+
 public class ColumnStucture {
 	private ColumnFormat format;
 	private String mappedBy;
@@ -9,6 +11,7 @@ public class ColumnStucture {
 	private String joinColumn;
 	private String inverseJoinColumn;
 	private String simpleColumn;
+	private ArrayList<ValueLabelPair> values; 
 
 	public ColumnStucture(ColumnFormat format, ColumnJoinType joinType, String mappedBy, Class<?> targetEntity,
 			String joinTable, String joinColumn, String inverseJoinColumn, String simpleColumn) {
@@ -21,6 +24,14 @@ public class ColumnStucture {
 		this.joinColumn = joinColumn;
 		this.inverseJoinColumn = inverseJoinColumn;
 		this.simpleColumn = simpleColumn;
+	}
+
+	public ArrayList<ValueLabelPair> getValues() {
+		return values;
+	}
+
+	public void setValues(ArrayList<ValueLabelPair> values) {
+		this.values = values;
 	}
 
 	public String getMappedBy() {
@@ -86,6 +97,4 @@ public class ColumnStucture {
 	public void setSimpleColumn(String simpleColumn) {
 		this.simpleColumn = simpleColumn;
 	}
-
-
 }
