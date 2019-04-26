@@ -252,7 +252,32 @@ public class EntityRegister implements ApplicationContextAware {
 		// transient
 		Transient transientAnnotation = field.getDeclaredAnnotation(Transient.class);
 		if (transientAnnotation != null) {
-			return;
+			ColumnStucture column = new ColumnStucture(ColumnFormat.parseFormat(field), null, null, field.getType(),
+					null, null, null,null);
+			Class<?> type = field.getType();
+			if (type.isPrimitive()) {
+				throw new StructureException(
+						"实体" + field.getDeclaringClass().getSimpleName() + "的属性" + field.getName() + " 必须为包装类 ");
+			}
+			
+			if(column.getFormat().equals(ColumnFormat.ENUM)) {
+				ArrayList<ValueLabelPair> arrayList = new ArrayList<ValueLabelPair>();
+				if(BaseEnum.class.isAssignableFrom(column.getTargetEntity())) {
+					Object[] enumConstants = column.getTargetEntity().getEnumConstants();
+					for (Object object : enumConstants) {
+						BaseEnum e = (BaseEnum)object;
+						arrayList.add(new ValueLabelPair(e.toString(),e.getLabel()));
+					}
+				}else {
+					Object[] enumConstants = column.getTargetEntity().getEnumConstants();
+					for (Object object : enumConstants) {
+						arrayList.add(new ValueLabelPair(object.toString(),object.toString()));
+					}
+				}
+				column.setValues(arrayList);
+			}
+			
+			entityStructure.getTransientFields().put(field.getName(), column);
 		} else {
 			throw new StructureException(
 					"实体" + field.getDeclaringClass().getSimpleName() + "的属性" + field.getName() + "没有设置正确");

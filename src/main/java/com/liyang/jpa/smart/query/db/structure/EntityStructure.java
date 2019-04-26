@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Transient;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,7 +25,17 @@ public class EntityStructure {
 	private Map<String, ColumnStucture> simpleFields = new HashMap();
 	
 	private Map<String, ColumnStucture> objectFields = new HashMap();
+	
+	private Map<String, ColumnStucture> transientFields = new HashMap();
 
+
+	public Map<String, ColumnStucture> getTransientFields() {
+		return transientFields;
+	}
+
+	public void setTransientFields(Map<String, ColumnStucture> transientFields) {
+		this.transientFields = transientFields;
+	}
 
 	public JpaRepository getJpaRepository() {
 		return jpaRepository;
