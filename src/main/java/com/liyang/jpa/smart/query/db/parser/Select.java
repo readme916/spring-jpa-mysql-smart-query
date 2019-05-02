@@ -30,7 +30,7 @@ public class Select implements Expression {
 				alias = preColumn + "." + column;
 			}
 
-			if ("*".equals(column)) {
+			if ("".equals(column)||"*".equals(column)) {
 				Map<String, ColumnStucture> simpleFields = entityStructure.getSimpleFields();
 				Set<Entry<String, ColumnStucture>> entrySet = simpleFields.entrySet();
 

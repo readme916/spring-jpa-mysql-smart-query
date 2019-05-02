@@ -19,6 +19,8 @@ public class EntityStructure {
 	
 	private Class<?> entityClass;
 	
+	private EntityType type;
+	
 	@JsonIgnore
 	private JpaRepository jpaRepository;
 	
@@ -28,6 +30,14 @@ public class EntityStructure {
 	
 	private Map<String, ColumnStucture> transientFields = new HashMap();
 
+
+	public EntityType getType() {
+		return type;
+	}
+
+	public void setType(EntityType type) {
+		this.type = type;
+	}
 
 	public Map<String, ColumnStucture> getTransientFields() {
 		return transientFields;

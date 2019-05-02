@@ -30,7 +30,7 @@ public class LeftJoin implements Expression {
 		String[] split = column.split("\\.");
 		if (split.length == 1) {
 
-			if ("*".equals(column)) {
+			if ("".equals(column)||"*".equals(column)) {
 				return;
 			}
 			if (!entityStructure.getObjectFields().containsKey(column)
