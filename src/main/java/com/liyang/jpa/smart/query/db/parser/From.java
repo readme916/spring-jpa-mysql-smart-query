@@ -9,7 +9,7 @@ public class From implements Expression {
 	@Override
 	public String sql() {
 		// TODO Auto-generated method stub
-		return " FROM " + mainEntityStructure.getTableName() + " AS " + mainEntityStructure.getName();
+		return " FROM " + mainEntityStructure.getTableName() + " AS `" + mainEntityStructure.getName()+"`";
 	}
 
 	@Override
