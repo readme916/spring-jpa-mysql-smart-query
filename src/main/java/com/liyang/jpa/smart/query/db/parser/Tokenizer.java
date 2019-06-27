@@ -25,12 +25,14 @@ public class Tokenizer {
 		String key = entry.getKey();
 
 		Object value;
-		try {
-			value = Integer.valueOf(entry.getValue());
-		} catch (NumberFormatException e) {
-			value = entry.getValue();
-		}
+//		try {
+//			value = Integer.valueOf(entry.getValue());
+//		} catch (NumberFormatException e) {
+//			value = entry.getValue();
+//		}
 
+		value = entry.getValue();
+		
 		Token token = new Token();
 		token.setOrigin(key);
 		if (key.endsWith("[gt]")) {
