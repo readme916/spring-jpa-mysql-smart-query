@@ -25,13 +25,14 @@ public class Tokenizer {
 		String key = entry.getKey();
 
 		Object value;
-//		try {
-//			value = Integer.valueOf(entry.getValue());
-//		} catch (NumberFormatException e) {
-//			value = entry.getValue();
-//		}
-
-		value = entry.getValue();
+		//boolean类型必须是数字格式
+		if("1".equals(entry.getValue())) {
+			value = 1;
+		}else if("0".equals(entry.getValue())) {
+			value = 0;
+		}else {
+			value = entry.getValue();
+		}
 		
 		Token token = new Token();
 		token.setOrigin(key);
