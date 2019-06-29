@@ -77,7 +77,7 @@ public class Select implements Expression {
 			// add(entityStructure, split[0], "");
 			Class<?> targetEntity = entityStructure.getObjectFields().get(split[0]).getTargetEntity();
 			EntityStructure classtostructure = SmartQuery.getStructure(targetEntity);
-			add(classtostructure, "*", split[0]);
+			add(classtostructure, "uuid", split[0]);
 			add(classtostructure, split[1], split[0]);
 		}
 
