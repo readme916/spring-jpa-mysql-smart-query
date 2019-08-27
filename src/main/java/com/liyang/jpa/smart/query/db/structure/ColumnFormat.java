@@ -1,11 +1,12 @@
 package com.liyang.jpa.smart.query.db.structure;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 public enum ColumnFormat{
-	DATE,STRING,INTEGER,BOOLEAN,DOUBLE,OBJECT,ENUM;
+	DATE,STRING,INTEGER,BOOLEAN,DOUBLE,OBJECT,ENUM,BIGDECIMAL;
 	
 	public static ColumnFormat parseFormat(Field declaredField) {
 		if (declaredField.getType().equals(String.class)) {
@@ -20,6 +21,8 @@ public enum ColumnFormat{
 			return DOUBLE;
 		} else if(declaredField.getType().isEnum()) {
 			return ENUM;
+		}else if(declaredField.getType().equals(BigDecimal.class)) {
+			return BIGDECIMAL;
 		}
 		return null;
 	}
