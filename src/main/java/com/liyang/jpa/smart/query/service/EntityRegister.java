@@ -114,7 +114,10 @@ public class EntityRegister implements ApplicationContextAware {
 				throw new StructureException(
 						"实体" + field.getDeclaringClass().getSimpleName() + "的属性" + field.getName() + " 必须为包装类 ");
 			}
-			
+			if(column.getFormat()==null) {
+				throw new StructureException(
+						"实体" + field.getDeclaringClass().getSimpleName() + "的属性 "+ field.getName() + " 格式为空 ");
+			}
 			if(column.getFormat().equals(ColumnFormat.ENUM)) {
 				ArrayList<ValueLabelPair> arrayList = new ArrayList<ValueLabelPair>();
 				if(BaseEnum.class.isAssignableFrom(column.getTargetEntity())) {
