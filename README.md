@@ -38,10 +38,10 @@ Map SmartyQuery.fetchOne(String entity, String queryString); //返回一个Map�
 - entity为@Entity的类名，首字母小写
 
 - queryString保留参数：fields ， page ， size ，sort，有特殊的意义
-    1. fields：返回的字段，可以为*，代表本entity所有的简单类型的属性；也可以是单独的属性或多个属性用逗号分隔；属性可以为简单属性或者对象，集合属性，也可以是两层属性 。fields=name,age,role.name。最好需要什么字段，指定什么字段，少使用*，提高mysql和网络性能
-    2. page：从0开始的页数。 page=1
-    3. size：每页的数量。 size=10
-    4. sort：按什么字段排序 ，例如：sort=age,desc ，可以是两层属性的排序，例如：sort=role.name,asc 
+    - fields：返回的字段，可以为*，代表本entity所有的简单类型的属性；也可以是单独的属性或多个属性用逗号分隔；属性可以为简单属性或者对象，集合属性，也可以是两层属性 。fields=name,age,role.name。最好需要什么字段，指定什么字段，少使用*，提高mysql和网络性能
+    - page：从0开始的页数。 page=1
+    - size：每页的数量。 size=10
+    - sort：按什么字段排序 ，例如：sort=age,desc ，可以是两层属性的排序，例如：sort=role.name,asc 
 - queryString支持的符号：[gt],[gte],[lt],[lte],[in],[not],[like],[or],[eq]，用法见例子
 
 - queryString支持两层复合条件查询。例如：fields=*&role.id=1&department.id[not]=2
