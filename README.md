@@ -38,7 +38,6 @@ public Object getUsers(){
 
 ### 四。queryString的写法总结：
 
-
 - queryString保留参数：fields ， page ， size ，sort，有特殊的意义
     - fields：返回的字段，可以为*，代表本entity所有的简单类型的属性；也可以是单独的属性或多个属性用逗号分隔；属性可以为简单属性或者对象，集合属性，也可以是两层属性 。fields=name,age,role.name。最好需要什么字段，指定什么字段，少使用*，提高mysql和网络性能
     - page：从0开始的页数。 page=1
@@ -49,6 +48,21 @@ public Object getUsers(){
 - queryString支持两层复合条件查询。例如：fields=*&role.id=1&department.id[not]=2
 
 
-## 配置参数
+### 五。注意事项
 - 在application.yml或者properties中添加spring.jpa.mysql-smart-query.max-result-rows，默认值是5000，如需要可以改大，改小
 - 本参数的意义是，数据库返回的原始数据的行数限制，left join或者  right join 返回的行数会比较大，要注意调节
+
+### 六。一些使用的例子
+例一：
+```java
+	SmartQuery.fetchOne("user","id=1&fields=*");
+```
+返回：
+```json
+{
+	"id":1,
+	"age:20,
+	"name":"张三"	
+}
+
+```
