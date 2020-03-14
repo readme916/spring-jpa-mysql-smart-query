@@ -55,14 +55,14 @@ public Object getUsers(){
 ### 六。一些使用的例子
 **例一：**
 ```java
-	SmartQuery.fetchOne("user","id=1&fields=*");
+SmartQuery.fetchOne("user","id=1&fields=*");
 ```
 返回：
 ```xml
 {
-	"id":1,
-	"age:20,
-	"name":"张三"	
+"id":1,
+"age:20,
+"name":"张三"	
 }
 
 ```
