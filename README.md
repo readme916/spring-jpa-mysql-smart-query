@@ -7,15 +7,22 @@
 2. 程序在启动过程中会检查@entity下的字段的注解的完整性，如果不全需要根据错误提示补全才能启动
 3. 根据@Entity的表结构生成解析树，用于后续查询
 4. 模仿url格式的查询语法，简单易懂
-5. 自动生成json格式的数据返回，没有递归的危险
+5. 自动生成json格式的数据返回，没有递归的风险
 
 ## 使用方法：
-1. 在@SpringBootApplication的下面加上@EnableJpaSmartQuery
-2. 在程序里使用SmartQuery的静态方法，例如：
-
+### 一。在@SpringBootApplication的下面加上@EnableJpaSmartQuery
+```java
+@SpringBootApplication
+@EnableJpaSmartQuery
+public class Application {
+}
 ```
-SmartQuery.fetchList("user", "fields=*&username=wang&age[not]=12&score[lt]=100&score[gt]=90&page=0&size=1&sort=score,desc");
-                     
+### 二。 在程序里使用SmartQuery的静态方法，例如：
+
+```java
+public Object getUsers(){
+	return SmartQuery.fetchList("user", "fields=*&username=wang&age[not]=12&score[lt]=100&score[gt]=90&page=0&size=1&sort=score,desc");
+}                     
 ```
 ## 支持5种静态方法：
 ```
