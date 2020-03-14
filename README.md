@@ -53,12 +53,12 @@ public Object getUsers(){
 - 本参数的意义是，数据库返回的原始数据的行数限制，left join或者  right join 返回的行数会比较大，要注意调节
 
 ### 六。一些使用的例子
-例一：
+**例一：**
 ```java
 	SmartQuery.fetchOne("user","id=1&fields=*");
 ```
 返回：
-```json
+```xml
 {
 	"id":1,
 	"age:20,
