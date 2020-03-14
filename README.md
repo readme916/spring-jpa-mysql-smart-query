@@ -85,17 +85,17 @@ SmartQuery.fetchList("user","fields=*");
 {
     "items": [
         {
-        	"age":20,
+        "age":20,
             "name": "张三",
             "id": 1
         },
          {
-        	"age":30,
+        "age":30,
             "name": "李四",
             "id": 2
         }
     ],
-    "total": 1,
+    "total": 2,
     "pageNumber": 0,
     "pageSize": 20
 }
@@ -118,7 +118,7 @@ SmartQuery.fetchList("user","fields=name,id&page=0&size=10&sort=id,desc");
         }
   
     ],
-    "total": 1,
+    "total": 2,
     "pageNumber": 0,
     "pageSize": 10
 }
@@ -141,7 +141,7 @@ SmartQuery.fetchList("user","fields=*&name=李四");
     ],
     "total": 1,
     "pageNumber": 0,
-    "pageSize": 10
+    "pageSize": 20
 }
 
 ```
