@@ -68,11 +68,80 @@ SmartQuery.fetchOne("user","id=1&fields=*");
 
 **例二：**
 ```java
-SmartQuery.fetchOne("user","id=1&fields=name");
+SmartQuery.fetchOne("user","id=1&fields=name,id");
 
 {
 	"id":1,
 	"name":"张三"	
+}
+
+```
+
+
+**例三：**
+```java
+SmartQuery.fetchList("user","fields=*");
+
+{
+    "items": [
+        {
+        	"age":20,
+            "name": "张三",
+            "id": 1
+        },
+         {
+        	"age":30,
+            "name": "李四",
+            "id": 2
+        }
+    ],
+    "total": 1,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+**例四：**
+```java
+SmartQuery.fetchList("user","fields=name,id&page=0&size=10&sort=id,desc");
+
+{
+    "items": [
+        {
+            "name": "李四",
+            "id": 2
+        },
+        {
+            "name": "张三",
+            "id": 1
+        }
+  
+    ],
+    "total": 1,
+    "pageNumber": 0,
+    "pageSize": 10
+}
+
+```
+
+
+
+**例五：**
+```java
+SmartQuery.fetchList("user","fields=*&name=李四");
+
+{
+    "items": [
+        {
+        	"age":30
+            "name": "李四",
+            "id": 2
+        }
+    ],
+    "total": 1,
+    "pageNumber": 0,
+    "pageSize": 10
 }
 
 ```
