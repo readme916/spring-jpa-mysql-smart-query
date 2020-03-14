@@ -24,7 +24,7 @@ public Object getUsers(){
 	return SmartQuery.fetchList("user", "fields=*&username=wang&age[not]=12&score[lt]=100&score[gt]=90&page=0&size=1&sort=score,desc");
 }                     
 ```
-### SmartQuery支持5种静态方法：
+### 三。SmartQuery支持5种静态方法：
 
 |  NO  | 方法                                                    												  |  描述                                                                                                                             |
 |:----:|------------------------------------------------------------------|----------------------------------------|
@@ -34,9 +34,10 @@ public Object getUsers(){
 |   4  | HTTPListResponse SmartyQuery.fetchGroup(String entity, String queryString);  | 返回一个分组的列表，查询queryString里面必须包含group=***这种格式，指定分组字段     |
 |   5  | Map SmartyQuery.fetchOne(String entity, String queryString);  | 返回一个Map格式的对象    |
 
+> String entity为@Entity的类名，并且首字母小写
 
-## 参数解释：
-- entity为@Entity的类名，首字母小写
+### 四。queryString的写法总结：
+
 
 - queryString保留参数：fields ， page ， size ，sort，有特殊的意义
     - fields：返回的字段，可以为*，代表本entity所有的简单类型的属性；也可以是单独的属性或多个属性用逗号分隔；属性可以为简单属性或者对象，集合属性，也可以是两层属性 。fields=name,age,role.name。最好需要什么字段，指定什么字段，少使用*，提高mysql和网络性能
