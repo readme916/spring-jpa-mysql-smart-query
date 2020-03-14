@@ -205,9 +205,9 @@ SmartQuery.fetchList("user","fields=*,role.name&role.code[not]=manager");
 
 ```
 
-**例七：**
+**例八：**
 ```java
-SmartQuery.fetchList("user","fields=*,role.*,role.users);
+SmartQuery.fetchList("user","fields=*,role.*,role.users&age[gt]=10&age[lte]=30&role.code[in]=manager,user);
 
 {
     "items": [
@@ -241,6 +241,96 @@ SmartQuery.fetchList("user","fields=*,role.*,role.users);
                 "id":"2"
             }
         }
+    ],
+    "total": 2,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+**例九：**
+```java
+SmartQuery.fetchTree("menu","fields=*&sort=sort.asc");
+
+{
+    "items": [
+        {
+            "parent": {},
+            "children": [
+                {
+                    "parent": {
+                        "code": "home",
+                        "name": "主页",
+                        "sort": 0,
+                        "id": 1,
+                    },
+                    "children": [
+                        {
+                            "parent": {
+                                "code": "one",
+                                "name": "第一页",
+                                "sort": 1,
+                                "id": 2,
+                            },
+                            "code": "one_one",
+                            "name": "第一页二级页",
+                            "sort": 3,
+                            "id": 3,
+                        }
+                    ],
+                    "code": "one",
+                    "name": "第一页",
+                    "sort": 1,
+                    "id": 2,
+                },
+                {
+                    "parent": {
+                        "code": "home",
+                        "name": "主页",
+                        "sort": 0,
+                        "id": 1,
+                    },
+                    "code": "two",
+                    "name": "第二页",
+                    "sort": 2,
+                    "id": 4,
+                },
+            ],
+            "code": "home",
+            "name": "主页",
+            "sort": 0,
+            "uuid": 1,
+        }
+    ],
+    "total": 4,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+
+**例十：**
+```java
+SmartQuery.fetchGroup("user","fields=*&group=age");
+
+{
+    "items": {
+       "20":[
+          {
+            "age":20,
+            "name": "张三",
+            "id": 1
+          }
+        ],
+      "30":[
+         {
+            "age":30,
+            "name": "李四",
+            "id": 2
+         }
+       ]
     ],
     "total": 2,
     "pageNumber": 0,
