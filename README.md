@@ -85,12 +85,12 @@ SmartQuery.fetchList("user","fields=*");
 {
     "items": [
         {
-        "age":20,
+            "age":20,
             "name": "张三",
             "id": 1
         },
          {
-        "age":30,
+            "age":30,
             "name": "李四",
             "id": 2
         }
@@ -134,12 +134,115 @@ SmartQuery.fetchList("user","fields=*&name=李四");
 {
     "items": [
         {
-        	"age":30
+            "age":30
             "name": "李四",
             "id": 2
         }
     ],
     "total": 1,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+
+
+**例六：**
+```java
+SmartQuery.fetchList("user","fields=*,role");
+
+{
+    "items": [
+        {
+            "age":30
+            "name": "李四",
+            "id": 2,
+            "role":{
+                "name":"管理员",
+                "code":"manager",
+                "id":"1"
+            }
+        },
+        {
+            "age":20
+            "name": "张三",
+            "id": 1,
+            "role":{
+                "name":"员工",
+                "code":"user",
+                "id":"2"
+            }
+        }
+    ],
+    "total": 2,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+**例七：**
+```java
+SmartQuery.fetchList("user","fields=*,role.name&role.code[not]=manager");
+
+{
+    "items": [
+        {
+            "age":20
+            "name": "张三",
+            "id": 1,
+            "role":{
+                "name":"员工",
+                "id":"2"
+            }
+        }
+    ],
+    "total": 1,
+    "pageNumber": 0,
+    "pageSize": 20
+}
+
+```
+
+**例七：**
+```java
+SmartQuery.fetchList("user","fields=*,role.*,role.users);
+
+{
+    "items": [
+        {
+            "age":30
+            "name": "李四",
+            "id": 2,
+            "role":{
+                "name":"管理员",
+                "code":"manager",
+                "users":[
+                   "age":30
+                   "name": "李四",
+                   "id": 2,
+                ]
+                "id":"1"
+            }
+        },
+        {
+            "age":20
+            "name": "张三",
+            "id": 1,
+            "role":{
+                "name":"员工",
+                "code":"user",
+                "users":[
+                   "age":20
+                   "name": "张三",
+                   "id": 1,
+                ]
+                "id":"2"
+            }
+        }
+    ],
+    "total": 2,
     "pageNumber": 0,
     "pageSize": 20
 }
