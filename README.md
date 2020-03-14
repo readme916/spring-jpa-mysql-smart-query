@@ -56,10 +56,22 @@ public Object getUsers(){
 **例一：**
 ```java
 SmartQuery.fetchOne("user","id=1&fields=*");
-返回：
+
 {
 	"id":1,
 	"age:20,
+	"name":"张三"	
+}
+
+```
+
+
+**例二：**
+```java
+SmartQuery.fetchOne("user","id=1&fields=name");
+
+{
+	"id":1,
 	"name":"张三"	
 }
 
