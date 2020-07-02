@@ -51,6 +51,7 @@ public Object getUsers(){
 ### 五。注意事项
 - 在application.yml或者properties中添加spring.jpa.mysql-smart-query.max-result-rows，默认值是5000，如需要可以改大，改小
 - 本参数的意义是，数据库返回的原始数据的行数限制，left join或者  right join 返回的行数会比较大，要注意调节
+- 在application.yml或者properties中添加spring.jpa.mysql-smart-query.show-sql=true ，是否显示查询sql
 
 ### 六。一些使用的例子
 **例一：**
