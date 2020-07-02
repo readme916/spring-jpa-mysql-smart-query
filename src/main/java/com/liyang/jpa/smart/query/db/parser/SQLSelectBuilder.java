@@ -158,6 +158,13 @@ public class SQLSelectBuilder {
 
 			List<Map<String, Object>> queryForList = JdbcQueryService.query(this.preparedStatements.fetchSql,
 					preparedParams);
+			
+			String property = ApplicationContextSupport.getApplicationContext().getEnvironment()
+					.getProperty("spring.jpa.mysql-smart-query.show-sql");
+			if(property!=null && property.equals("true")) {
+				logger.info(this.preparedStatements.fetchSql);
+			}
+			
 			return new HTTPListResponse(transformAsList(queryForList, mainEntityStructure), _preCount.getTotal(), page,
 					size);
 

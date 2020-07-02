@@ -21,7 +21,7 @@ public class TokenizeParameter {
 		if (queries == null || queries.isEmpty()) {
 			return;
 		}
-
+		queries = new HashMap<String,String>(queries);
 		this.sort = queries.remove("sort");
 		String page = queries.remove("page");
 		if (page != null) {
