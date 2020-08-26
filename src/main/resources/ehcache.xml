@@ -2,7 +2,7 @@
 <ehcache>
     <!-- 设定缓存的默认数据过期策略 -->
     <defaultCache
-            maxElementsInMemory="10000" 
+            maxElementsInMemory="100000" 
             eternal="false" 
             overflowToDisk="false"
             timeToIdleSeconds="86400"
@@ -11,7 +11,7 @@
             diskExpiryThreadIntervalSeconds="120"/>
 
     <cache name="mysqlBuilder"
-        maxElementsInMemory="10000"
+        maxElementsInMemory="100000"
         eternal="false"
         overflowToDisk="false"
         timeToIdleSeconds="86400"
