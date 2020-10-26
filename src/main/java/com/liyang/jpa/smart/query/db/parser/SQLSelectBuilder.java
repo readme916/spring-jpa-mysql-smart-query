@@ -119,9 +119,9 @@ public class SQLSelectBuilder {
 						defaultOrder = true;
 					}
 				}
-				if (defaultOrder == false) {
-					orderBy.getOrders().add("`" + mainEntityName + "`.uuid DESC");
-				}
+//				if (defaultOrder == false) {
+//					orderBy.getOrders().add("`" + mainEntityName + "`.uuid DESC");
+//				}
 			}
 	
 
