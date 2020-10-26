@@ -109,15 +109,21 @@ public class SQLSelectBuilder {
 
 			this.limit = new Limit();
 
-			boolean defaultOrder = false;
-			for (String ex : orderBy.getExists()) {
-				if (ex.contains("`" + mainEntityName + "`")) {
-					defaultOrder = true;
+			
+			if(sort == null) {
+				orderBy.getOrders().add("`" + mainEntityName + "`.uuid DESC");
+			}else {
+				boolean defaultOrder = false;
+				for (String ex : orderBy.getExists()) {
+					if (ex.contains("`" + mainEntityName + "`")) {
+						defaultOrder = true;
+					}
+				}
+				if (defaultOrder == false) {
+					orderBy.getOrders().add("`" + mainEntityName + "`.uuid DESC");
 				}
 			}
-			if (defaultOrder == false) {
-				orderBy.getOrders().add("`" + mainEntityName + "`.uuid DESC");
-			}
+	
 
 			String fetchSql = select.sql() + from.sql() + innerJoin.sql() + leftJoin.sql() + where.sql() + orderBy.sql()
 					+ limit.sql();
