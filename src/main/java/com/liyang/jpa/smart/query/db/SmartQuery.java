@@ -68,6 +68,13 @@ public class SmartQuery {
 		return _fetchList(entityName, queries);
 	}
 	
+	public static HTTPListResponse fetchAllList(String entityName, String queryString) {
+		return _fetchAllList(entityName, queryMap(queryString));
+	}
+	public static HTTPListResponse fetchAllList(String entityName, HashMap<String, String> queries) {
+		return _fetchAllList(entityName, queries);
+	}
+	
 
 	public static HTTPListResponse fetchTree(String entityName, String queryString) {
 		return _fetchTree(entityName, queryMap(queryString));
@@ -130,6 +137,12 @@ public class SmartQuery {
 		TokenizeParameter Parameters = new TokenizeParameter(entityName,queries);
 		SQLSelectBuilder sqlSelectBuilder = new SQLSelectBuilder().feed(Parameters).build();
 		return sqlSelectBuilder.fetchAll();
+	}
+	
+	private static HTTPListResponse _fetchAllList(String entityName, HashMap<String, String> queries) {
+		TokenizeParameter Parameters = new TokenizeParameter(entityName,queries);
+		SQLSelectBuilder sqlSelectBuilder = new SQLSelectBuilder().feed(Parameters).build();
+		return sqlSelectBuilder.fetchAllList();
 	}
 
 	private static long _fetchCount(String entityName, HashMap<String, String> queries) {

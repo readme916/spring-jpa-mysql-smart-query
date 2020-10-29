@@ -30,9 +30,10 @@ public Object getUsers(){
 |:----:|------------------------------------------------------------------|----------------------------------------|
 |   1  | long SmartyQuery.fetchCount(String entity, String queryString);  | 根据筛选条件，返回数量                                                                                       |
 |   2  | HTTPListResponse SmartyQuery.fetchList(String entity, String queryString);  | 返回一个带分页的对象列表                                           |
-|   3  | HTTPListResponse SmartyQuery.fetchTree(String entity, String queryString);  | 返回一个多根树形的对象列表，对象entity必须有parent和children属性     |
-|   4  | HTTPListResponse SmartyQuery.fetchGroup(String entity, String queryString);  | 返回一个分组的列表，查询queryString里面必须包含group=***这种格式，指定分组字段     |
-|   5  | Map SmartyQuery.fetchOne(String entity, String queryString);  | 返回一个Map格式的对象    |
+|   3  | HTTPListResponse SmartyQuery.fetchAllList(String entity, String queryString);  | 返回一个没有分页的对象列表，节约一个count(*) groupby 的查询，优化时候有意义                                           
+|   4  | HTTPListResponse SmartyQuery.fetchTree(String entity, String queryString);  | 返回一个多根树形的对象列表，对象entity必须有parent和children属性     |
+|   5  | HTTPListResponse SmartyQuery.fetchGroup(String entity, String queryString);  | 返回一个分组的列表，查询queryString里面必须包含group=***这种格式，指定分组字段     |
+|   6  | Map SmartyQuery.fetchOne(String entity, String queryString);  | 返回一个Map格式的对象    |
 
 > String entity为@Entity的类名，并且首字母小写
 

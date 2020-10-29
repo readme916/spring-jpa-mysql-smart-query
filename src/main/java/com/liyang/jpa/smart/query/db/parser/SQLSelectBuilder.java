@@ -176,6 +176,34 @@ public class SQLSelectBuilder {
 
 		}
 	}
+	
+	public HTTPListResponse fetchAllList() {
+
+			Collection<Token> values = conditions.values();
+			HashMap<String, Object> preparedParams = new HashMap<>();
+			for (Token token : values) {
+				preparedParams.put(token.getOrigin(), token.getValue());
+			}
+			preparedParams.put("pageStart", 0);
+			String rows = ApplicationContextSupport.getApplicationContext().getEnvironment()
+					.getProperty("spring.jpa.mysql-smart-query.max-result-rows");
+			if(rows!=null) {
+				preparedParams.put("pageSize", Integer.valueOf(rows));				
+			}else {
+				preparedParams.put("pageSize", 5000);			
+			}
+
+			List<Map<String, Object>> queryForList = JdbcQueryService.query(this.preparedStatements.fetchSql,
+					preparedParams);
+			
+			String property = ApplicationContextSupport.getApplicationContext().getEnvironment()
+					.getProperty("spring.jpa.mysql-smart-query.show-sql");
+			if(property!=null && property.equals("true")) {
+				logger.info(this.preparedStatements.fetchSql);
+			}
+			Object o = transformAsList(queryForList, mainEntityStructure);
+			return new HTTPListResponse(o, ((List)o).size(), 0,0);
+	}
 
 	public long fetchCount() {
 		StartAndSize _preCount = _preCount();
@@ -244,6 +272,10 @@ public class SQLSelectBuilder {
 
 	protected Object transformAsList(List<Map<String, Object>> queryForList, EntityStructure nametostructure) {
 
+		if(queryForList == null || queryForList.size() == 0) {
+			return new ArrayList();
+		}
+		
 		LinkedHashMap<String, Object> mapList = new LinkedHashMap<>();
 
 		for (Map<String, Object> row : queryForList) {
