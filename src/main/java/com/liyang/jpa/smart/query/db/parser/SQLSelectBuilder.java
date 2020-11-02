@@ -385,7 +385,16 @@ public class SQLSelectBuilder {
 						if (columnStucture != null) {
 							EntityStructure targetStructure = SmartQuery
 									.getStructure(columnStucture.getTargetEntity());
-							hashMap.put(entry.getKey(), mapListToMap(entry.getValue(), targetStructure));
+							if(columnStucture.getJoinType().equals(ColumnJoinType.MANY_TO_MANY) || columnStucture.getJoinType().equals(ColumnJoinType.ONE_TO_MANY)){
+								if(entry.getValue() instanceof Map && ((Map)entry.getValue()).size()==0) {
+									hashMap.put(entry.getKey(), mapListToMap(new ArrayList(), targetStructure));	
+									
+								}else {
+									hashMap.put(entry.getKey(), mapListToMap(entry.getValue(), targetStructure));	
+								}
+							}else {
+								hashMap.put(entry.getKey(), mapListToMap(entry.getValue(), targetStructure));								
+							}
 						} else {
 							hashMap.put(entry.getKey(), mapListToMap(entry.getValue(), structure));
 						}
